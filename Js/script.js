@@ -42,9 +42,11 @@ function App(){
         return '';
     }
 
+    console.log(cells);
+
     const renderSymbol = (symbol) => <span className = {`symbol ${getSymbolClassName(symbol)}`}>{symbol}</span>
     const handleCellClick = (index) => {
-        if(cells[index]){
+        if(cells[index] || winnerSequence){
             return;
         }
         
@@ -57,10 +59,19 @@ function App(){
         setWinnerSeqence(winner);
     }
 
+    const winnerSymbol = winnerSequence ? cells[winnerSequence[0]] : undefined;
+
+    const clearField = () =>
+    {
+        const cellsCopyClear = cells.fill(null);
+
+        setSells(cellsCopyClear);
+    }
+
     return (
         <div className = "game">
             <div className = "game-info">
-                Ход: {renderSymbol(currentStep)}
+                {winnerSequence ? "Победитель: ": "Ход: "} {renderSymbol(winnerSymbol ?? currentStep)}
             </div>
             <div className = "game-field">
                 {cells.map((symbol, index) =>{
@@ -73,6 +84,9 @@ function App(){
                         {symbol ? renderSymbol(symbol) : null}
                         </button>
                 })}
+            </div>
+            <div className = 'game-clear'>
+                <button onClick = {clearField}>Очистить</button>
             </div>
         </div>
     )

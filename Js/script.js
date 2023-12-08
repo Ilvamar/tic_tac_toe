@@ -55,7 +55,7 @@ function App(){
         const winner = computeWinner(cellsCopy);
 
         setSells(cellsCopy);
-        setCurrentStep((currentStep == SYMBOL_O) ? SYMBOL_X : SYMBOL_O);
+        setCurrentStep((currentStep == SYMBOL_X) ? SYMBOL_O : SYMBOL_X);
         setWinnerSeqence(winner);
     }
 
@@ -66,12 +66,17 @@ function App(){
         const cellsCopyClear = cells.fill(null);
 
         setSells(cellsCopyClear);
+        setCurrentStep((currentStep == SYMBOL_X) ? SYMBOL_O : SYMBOL_X);
+        setWinnerSeqence(undefined);
     }
+
+    const tieDraw = !winnerSequence && !cells.includes(null);
 
     return (
         <div className = "game">
             <div className = "game-info">
-                {winnerSequence ? "Победитель: ": "Ход: "} {renderSymbol(winnerSymbol ?? currentStep)}
+                {tieDraw ? 'Ничья' : winnerSequence ? "Победитель: " : "Ход: "} 
+                {!tieDraw && renderSymbol(winnerSymbol ?? currentStep)}
             </div>
             <div className = "game-field">
                 {cells.map((symbol, index) =>{

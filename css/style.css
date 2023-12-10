@@ -48,3 +48,9 @@ html {
   .symbol--o {
     color: green;
   }
+
+  .reset{
+    margin-top: 10px;
+    background-color: transparent;
+    border: 1px solid gray;
+  }

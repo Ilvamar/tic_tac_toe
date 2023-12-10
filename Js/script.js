@@ -55,7 +55,7 @@ function useGameState(){
         const cellsCopyClear = cells.fill(null);
 
         setSells(cellsCopyClear);
-        setCurrentStep(SYMBOL_X);
+        setCurrentStep((currentStep === SYMBOL_X) ? SYMBOL_O : SYMBOL_X);
         setWinnerSeqence(undefined);
     }
 
